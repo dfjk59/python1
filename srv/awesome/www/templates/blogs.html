@@ -36,7 +36,7 @@
             <div>&nbsp;</div>
 	        <div id="lizhiwei">
 	            <li>只要朝着一个方向努力，一切都会变得得心应手。</li>
-            </div>
+	        </div>
             <div>&nbsp;</div>
             <div id="lizhiwei1">
             	<li>飞机票：</li>
@@ -60,12 +60,12 @@
 		<div id="demo">
 			<div id="indemo">
 			<div id="demo1">
-			<a href="http://www.amuker.com/"><img src="http://a4.qpic.cn/psb?/V10jkfNe3i2DS5/.WLu3Z1fhrojEckTw4RdnkfJGrkrpR2Kl6CiZjt2kHA!/m/dB8BAAAAAAAA&bo=OATKAjgEygIFCSo!&rf=photolist" border="0" /></a>
-			<a href="http://www.amuker.com/"><img src="http://a4.qpic.cn/psb?/V10jkfNe3i2DS5/WPB02*PQKXk0YFhWvxlavZM*GvH4bS21hlZfoyAMKZ4!/m/dK8AAAAAAAAA&bo=jQcABUATwAwFCTo!&rf=photolist" border="0" /></a>
-			<a href="http://www.amuker.com/"><img src="http://a1.qpic.cn/psb?/V10jkfNe3i2DS5/Wi6o6fDi8IoAH4y.mgbNR*t4hx4clFuV.ZCOPUDBMCw!/m/dCABAAAAAAAA&bo=jQcABUATwAwFCTo!&rf=photolist" border="0" /></a>
-			<a href="http://www.amuker.com/"><img src="http://a1.qpic.cn/psb?/V10jkfNe3i2DS5/ScG5.kzKAFyrG03VfIMPdy*qaczbwczQAcEKfSeZ0CM!/m/dCABAAAAAAAA&bo=5Aj*BOQI*wQFByQ!&rf=photolist" border="0" /></a>
+			<a href="http://www.amuker.com/"><img src="http://r.photo.store.qq.com/psb?/V10jkfNe3i2DS5/.WLu3Z1fhrojEckTw4RdnkfJGrkrpR2Kl6CiZjt2kHA!/r/dB8BAAAAAAAA" border="0" /></a>
+			<a href="http://www.amuker.com/"><img src="http://r.photo.store.qq.com/psb?/V10jkfNe3i2DS5/WPB02*PQKXk0YFhWvxlavZM*GvH4bS21hlZfoyAMKZ4!/r/dK8AAAAAAAAA" border="0" /></a>
+			<a href="http://www.amuker.com/"><img src="http://r.photo.store.qq.com/psb?/V10jkfNe3i2DS5/Wi6o6fDi8IoAH4y.mgbNR*t4hx4clFuV.ZCOPUDBMCw!/r/dCABAAAAAAAA" border="0" /></a>
+			<a href="http://www.amuker.com/"><img src="http://a3.qpic.cn/psb?/V10jkfNe3i2DS5/XygDEBQK1I2lpDlttvcrqCYb4q.c7qom7ilMLinXLdI!/b/dB8BAAAAAAAA&bo=5Aj*BOQI*wQFByQ!&rf=viewer_4" border="0" /></a>
+			<a href="http://www.amuker.com/"><img src="http://a1.qpic.cn/psb?/V10jkfNe3i2DS5/JPbG*unoRuEmvbwClWBduGR7ZY4fyvi0bHId6r4Xwk8!/b/dK4AAAAAAAAA&bo=5Aj*BOQI*wQFByQ!&rf=viewer_4" border="0" /></a>
 			<a href="http://www.amuker.com/"><img src="http://a1.qpic.cn/psb?/V10jkfNe3i2DS5/JPbG*unoRuEmvbwClWBduGR7ZY4fyvi0bHId6r4Xwk8!/b/dK4AAAAAAAAA&bo=5Aj*BOQI*wQFACM!&rf=viewer_4" border="0" /></a>
-			<a href="http://www.amuker.com/"><img src="http://a3.qpic.cn/psb?/V10jkfNe3i2DS5/cWppQZr9THuL20GtX9i2ABVjtmO388dsfMxvUJ60KQE!/b/dB8BAAAAAAAA&bo=5Aj*BOQI*wQFACM!&rf=viewer_4" border="0" /></a>
 			
 			</div>
 			<div id="demo2"></div>
@@ -101,7 +101,70 @@
     {% endfor %}
     {{ pagination('/?page=', page) }}
     </div>
+    <div class="audio_wrap">
+	    <div class="music_control">
+	        <span class="play_btn"></span>
+	        <span class="stop_btn"></span>
+	    </div>
+	</div>
 	
-    
-
+	
+	<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+	<script>
+	
+	
+	
+	function load_ready(){
+	    audio_array[0].play();
+	    audio_array[0].loop=true;
+	}
+	
+	
+	/*声音脚本 开始*/
+	//音频标签存放数组
+	var audio_array=[];
+	function loadSound(){
+	    var audio_num=0;
+	
+	    //获得json中图片的地址
+	    var audio = document.createElement("audio");
+	    audio.src = "./li/1.mp3";//地址
+	    audio.className="bg_music";
+	    
+	    audio_array.push(audio);
+	    $(".audio_wrap").append(audio);
+	    
+	    audio_array[0].load();
+	    audio_array[0].addEventListener("canplaythrough", function(){
+	
+	        load_ready();
+	
+	    });
+	    
+	}
+	
+	var play=1;
+	$(".music_control").click(function(){
+	    if(play==1){
+	        
+	        $(".play_btn").hide();
+	        $(".stop_btn").show();
+	        audio_array[0].pause();
+	        play=0;
+	        
+	    }else{
+	        
+	        $(".stop_btn").hide();
+	        $(".play_btn").show();
+	        audio_array[0].play()
+	        play=1;
+	        
+	    }
+	});
+	
+	/*声音脚本 结束*/
+	loadSound();
+	</script>
+	
+	
 {% endblock %}
