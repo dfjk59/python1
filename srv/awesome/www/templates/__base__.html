@@ -30,12 +30,50 @@
     		color:orangered;
     	}
     </style>
+    <style>
+	.music_control {
+	  display: block;
+	  height: 50px;
+	  width: 50px;
+	  position: absolute;
+	  right: 0px;
+	  top: 0px;
+	  -webkit-tap-highlight-color: rgba(0,0,0,0);
+	}
+	.play_btn {
+	  display: block;
+	  height: 16px;
+	  width: 16px;
+	  position: absolute;
+	  left: 17px;
+	  top: 17px;
+	  background: url(sound.png) no-repeat 0 0; 
+	  background-size: contain;
+	  -webkit-animation: a_music_play 3s linear infinite;
+	}
+	.stop_btn {
+	  display: none;
+	  height: 16px;
+	  width: 16px;
+	  position: absolute;
+	  left: 17px;
+	  top: 17px;
+	  background: url(sound_muted.png) no-repeat 0 0;
+	  background-size: contain;
+	}
+	@-webkit-keyframes a_music_play{
+	    0%{ -webkit-transform: rotate(0deg);}
+	    100%{ -webkit-transform: rotate(360deg);}
+	}
+	
+	</style>
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/sha1.min.js"></script>
     <script src="/static/js/uikit.min.js"></script>
     <script src="/static/js/sticky.min.js"></script>
     <script src="/static/js/vue.min.js"></script>
     <script src="/static/js/awesome.js"></script>
+    
     {% block beforehead %}<!-- before head  -->{% endblock %}
 </head>
 <body>
@@ -45,6 +83,65 @@
 	        <span class="stop_btn"></span>
 	    </div>
 	</div>
+	
+	
+	<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+	<script>
+	
+	
+	
+	function load_ready(){
+	    audio_array[0].play();
+	    audio_array[0].loop=true;
+	}
+	
+	
+	/*声音脚本 开始*/
+	//音频标签存放数组
+	var audio_array=[];
+	function loadSound(){
+	    var audio_num=0;
+	
+	    //获得json中图片的地址
+	    var audio = document.createElement("audio");
+	    audio.src = "./li/1.mp3";//地址
+	    audio.className="bg_music";
+	    
+	    audio_array.push(audio);
+	    $(".audio_wrap").append(audio);
+	    
+	    audio_array[0].load();
+	    audio_array[0].addEventListener("canplaythrough", function(){
+	
+	        load_ready();
+	
+	    });
+	    
+	}
+	
+	var play=1;
+	$(".music_control").click(function(){
+	    if(play==1){
+	        
+	        $(".play_btn").hide();
+	        $(".stop_btn").show();
+	        audio_array[0].pause();
+	        play=0;
+	        
+	    }else{
+	        
+	        $(".stop_btn").hide();
+	        $(".play_btn").show();
+	        audio_array[0].play()
+	        play=1;
+	        
+	    }
+	});
+	
+	/*声音脚本 结束*/
+	loadSound();
+	</script>
+
 	<div style="position:fixed;  width:100%;height:100%">
 		<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1489910359078&di=4c1fb6bf2900a32d49fbf173ff7a99c8&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201407%2F14%2F20140714115947_mJavd.jpeg" width=100% height=100%>
 	</div>

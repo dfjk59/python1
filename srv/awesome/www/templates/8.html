@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
-    <title>微信中自动播放音乐</title>
+{% extends 'blogs.html' %}
 	<style>
-	body{
-	    background:#ddd;
-	}
 	.music_control {
 	  display: block;
 	  height: 50px;
@@ -44,8 +36,6 @@
 	}
 	
 	</style>
-</head>
-<body>
 	<div class="audio_wrap">
 	    <div class="music_control">
 	        <span class="play_btn"></span>
@@ -110,6 +100,4 @@
 	/*声音脚本 结束*/
 	loadSound();
 	</script>
-
-</body>
-</html>
+{% endblock %}
